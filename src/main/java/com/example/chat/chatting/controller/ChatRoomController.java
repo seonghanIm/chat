@@ -18,13 +18,15 @@ public class ChatRoomController {
     @GetMapping("/rooms")
     @ResponseBody
     public List<ChatRoom> room(){
-        return chatRoomRepository.findAllRoom();
+        return chatRoomRepository.findAll();
     }
 
     @PostMapping("/room")
     @ResponseBody
     public ChatRoom createRoom(@RequestBody ChatRoomDto dto){
-        return chatRoomRepository.createChatRoom(dto.getRoomName());
+        ChatRoom chatRoom = ChatRoom.create(dto.getRoomName());
+        chatRoomRepository.save(chatRoom);
+        return chatRoom;
     }
 
     @GetMapping("/room/{roomId}")

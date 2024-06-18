@@ -1,18 +1,35 @@
 package com.example.chat.chatting.model;
 
+import com.example.chat.common.model.BaseEntity;
+import jakarta.persistence.*;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.time.LocalDateTime;
 
 @Data
-@NoArgsConstructor
-public class ChatMessage {
+@Entity
+@Table(name = "chat_message")
+public class ChatMessage extends BaseEntity {
 
-    public enum MessageType{
-        ENTER,TALK,EXIT,MATCH,MATCH_REQUEST;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "message_type", nullable = false)
+    private MessageType messageType;
+
+    @ManyToOne
+    @JoinColumn(name = "chat_room", nullable = false)
+    private ChatRoom chatRoom;
+
+    private String sender;
+
+    private String message;
+
+    private LocalDateTime messageTime;
+
+    private static void saveChatMessage(){
+
     }
 
-    private MessageType messageType;
-    private String roomId;
-    private String sender;
-    private String message;
 }
