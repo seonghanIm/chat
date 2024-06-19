@@ -1,6 +1,7 @@
 package com.example.chat.chat_room.model;
 
 import com.example.chat.chat_message.model.ChatMessage;
+import com.example.chat.common.model.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -10,7 +11,7 @@ import java.util.UUID;
 @Data
 @Entity
 @Table(name = "chat_room")
-public class ChatRoom {
+public class ChatRoom extends BaseEntity {
     @Id
     private String roomId;
 
