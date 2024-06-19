@@ -26,8 +26,6 @@ public class ChatMessage extends BaseEntity {
 
     private String message;
 
-    private LocalDateTime messageTime;
-
     private static void saveChatMessage(){
 
     }
