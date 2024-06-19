@@ -1,4 +1,4 @@
-package com.example.chat.chatting.model;
+package com.example.chat.chat_message.model;
 
 public enum MessageType {
     ENTER,TALK,EXIT,MATCH,MATCH_REQUEST;

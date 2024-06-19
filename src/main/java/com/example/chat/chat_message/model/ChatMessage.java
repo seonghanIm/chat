@@ -1,9 +1,9 @@
-package com.example.chat.chatting.model;
+package com.example.chat.chat_message.model;
 
+import com.example.chat.chat_room.model.ChatRoom;
 import com.example.chat.common.model.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Data;
-import java.time.LocalDateTime;
 
 @Data
 @Entity

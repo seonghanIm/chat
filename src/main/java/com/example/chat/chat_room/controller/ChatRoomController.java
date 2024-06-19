@@ -1,8 +1,8 @@
-package com.example.chat.chatting.controller;
+package com.example.chat.chat_room.controller;
 
-import com.example.chat.chatting.model.ChatRoom;
-import com.example.chat.chatting.model.ChatRoomDto;
-import com.example.chat.chatting.repository.ChatRoomRepository;
+import com.example.chat.chat_room.model.ChatRoom;
+import com.example.chat.chat_room.model.ChatRoomDto;
+import com.example.chat.chat_room.repository.ChatRoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

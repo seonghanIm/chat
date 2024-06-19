@@ -1,13 +1,8 @@
-package com.example.chat.chatting.model;
+package com.example.chat.chat_message.model;
 
-import com.example.chat.chatting.repository.ChatMessageRepository;
-import com.example.chat.chatting.repository.ChatRoomRepository;
-import jakarta.persistence.*;
-import lombok.Builder;
+import com.example.chat.chat_room.repository.ChatRoomRepository;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor

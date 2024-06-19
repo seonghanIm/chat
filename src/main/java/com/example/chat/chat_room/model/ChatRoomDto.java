@@ -1,4 +1,4 @@
-package com.example.chat.chatting.model;
+package com.example.chat.chat_room.model;
 
 import lombok.Data;
 

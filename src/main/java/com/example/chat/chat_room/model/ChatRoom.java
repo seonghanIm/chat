@@ -1,11 +1,8 @@
-package com.example.chat.chatting.model;
+package com.example.chat.chat_room.model;
 
+import com.example.chat.chat_message.model.ChatMessage;
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.UUID;
