@@ -2,6 +2,7 @@ package com.example.chat.chat_message.model;
 
 import com.example.chat.chat_room.model.ChatRoom;
 import com.example.chat.common.model.BaseEntity;
+import com.example.chat.user.model.User;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -22,7 +23,8 @@ public class ChatMessage extends BaseEntity {
     @JoinColumn(name = "chat_room", nullable = false)
     private ChatRoom chatRoom;
 
-    private String sender;
+    @ManyToOne
+    private User sender;
 
     private String message;
 

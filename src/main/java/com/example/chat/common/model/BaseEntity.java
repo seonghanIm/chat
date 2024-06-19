@@ -24,6 +24,9 @@ public class BaseEntity {
     @Column(name = "updated_at")
     private String updatedAt;
 
+    @Column(name = "delete_yn")
+    private String deleteYn = "N";
+
     @PrePersist
     public void onPrePersist() {
         this.createdAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
@@ -33,5 +36,9 @@ public class BaseEntity {
     @PreUpdate
     public void onPreUpdate() {
         this.updatedAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
+    }
+
+    public void delete() {
+        this.deleteYn = "Y";
     }
 }

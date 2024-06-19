@@ -7,10 +7,25 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
 @SuperBuilder
-public class BaseResponse {
+@NoArgsConstructor
+public class BaseResponse<T> {
+
+    public BaseResponse(int code, String message){
+        this.code = code;
+        this.message = message;
+    }
     private int code;
     private String message;
+    private T responseBody;
+
+    public static <T> BaseResponse<T> ofSuccess(T data) {
+        return new BaseResponse<>(200, "Success", data);
+    }
+
+    public static <T> BaseResponse<T> ofFail(int code, String message) {
+        return new BaseResponse<>(code, message);
+    }
+
     
 }

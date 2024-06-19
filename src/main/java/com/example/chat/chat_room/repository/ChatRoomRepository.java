@@ -1,6 +1,7 @@
 package com.example.chat.chat_room.repository;
 
 import com.example.chat.chat_room.model.ChatRoom;
+import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
