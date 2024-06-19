@@ -1,15 +1,10 @@
 package com.example.chat.user.model;
 
-import com.example.chat.chat_message.model.ChatMessage;
-import com.example.chat.chat_room.model.ChatRoom;
 import com.example.chat.common.model.BaseDto;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-
-import java.util.List;
 
 @Data
 @SuperBuilder

@@ -1,10 +1,8 @@
 package com.example.chat.common.model;
 
-import com.example.chat.chat_room.repository.ChatRoomRepository;
+import com.example.chat.chatroom.repository.ChatRoomRepository;
 import com.example.chat.user.repository.UserRepository;
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

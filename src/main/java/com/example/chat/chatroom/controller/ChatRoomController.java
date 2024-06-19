@@ -1,8 +1,8 @@
-package com.example.chat.chat_room.controller;
+package com.example.chat.chatroom.controller;
 
-import com.example.chat.chat_room.model.ChatRoom;
-import com.example.chat.chat_room.model.ChatRoomDto;
-import com.example.chat.chat_room.repository.ChatRoomRepository;
+import com.example.chat.chatroom.model.ChatRoom;
+import com.example.chat.chatroom.model.ChatRoomDto;
+import com.example.chat.chatroom.repository.ChatRoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,13 +21,13 @@ public class ChatRoomController {
         return chatRoomRepository.findAll();
     }
 
-    @PostMapping("/room")
-    @ResponseBody
-    public ChatRoom createRoom(@RequestBody ChatRoomDto dto){
-        ChatRoom chatRoom = ChatRoom.create(dto.getRoomName());
-        chatRoomRepository.save(chatRoom);
-        return chatRoom;
-    }
+//    @PostMapping("/room")
+//    @ResponseBody
+//    public ChatRoom createRoom(@RequestBody ChatRoomDto dto){
+//        ChatRoom chatRoom = ChatRoom.create(dto.getRoomName());
+//        chatRoomRepository.save(chatRoom);
+//        return chatRoom;
+//    }
 
     @GetMapping("/room/{roomId}")
     @ResponseBody

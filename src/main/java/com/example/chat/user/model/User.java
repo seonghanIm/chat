@@ -1,14 +1,17 @@
 package com.example.chat.user.model;
 
-import com.example.chat.chat_message.model.ChatMessage;
-import com.example.chat.chat_room.model.ChatRoom;
+import com.example.chat.chatmessage.model.ChatMessage;
+import com.example.chat.chatroom.model.ChatRoom;
+import com.example.chat.chatroomuser.model.ChatRoomUser;
 import com.example.chat.common.model.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 // mapped by 는 foreign key 를 가지고 있지 않은 쪽에 달아준다.
@@ -17,7 +20,7 @@ import java.util.List;
 // ChatRoom 은 User 가 없다면 의미가 없는 객체이다.
 @Data
 @Entity
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "t_user")
@@ -37,6 +40,9 @@ public class User extends BaseEntity {
 
     @Column(nullable = false)
     private String password;
+
+    @OneToMany(mappedBy = "user")
+    private List<ChatRoomUser> chatRoomUserList = new ArrayList<>();
 
 
     public void changeUserId(String userId){

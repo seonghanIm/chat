@@ -1,14 +1,9 @@
-package com.example.chat.chat_message.model;
+package com.example.chat.chatmessage.model;
 
-import com.example.chat.chat_room.repository.ChatRoomRepository;
 import com.example.chat.common.model.BaseDto;
-import com.example.chat.common.model.Bean;
-import com.example.chat.user.repository.UserRepository;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import net.bytebuddy.implementation.bind.annotation.Super;
 
 @Data
 @SuperBuilder

@@ -1,7 +1,6 @@
 package com.example.chat.user.controller;
 
-import com.example.chat.chat_room.model.ChatRoom;
-import com.example.chat.chat_room.model.ChatRoomDto;
+import com.example.chat.chatroom.model.ChatRoomDto;
 import com.example.chat.common.model.BaseRequest;
 import com.example.chat.common.model.BaseResponse;
 import com.example.chat.user.model.UserDto;

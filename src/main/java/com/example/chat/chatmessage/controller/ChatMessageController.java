@@ -1,7 +1,7 @@
-package com.example.chat.chat_message.controller;
+package com.example.chat.chatmessage.controller;
 
-import com.example.chat.chat_message.model.ChatMessageDto;
-import com.example.chat.chat_message.service.ChatMessageService;
+import com.example.chat.chatmessage.model.ChatMessageDto;
+import com.example.chat.chatmessage.service.ChatMessageService;
 import com.example.chat.common.model.BaseRequest;
 import com.example.chat.common.model.BaseResponse;
 import lombok.RequiredArgsConstructor;

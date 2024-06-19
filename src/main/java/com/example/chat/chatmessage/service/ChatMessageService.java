@@ -1,12 +1,11 @@
-package com.example.chat.chat_message.service;
+package com.example.chat.chatmessage.service;
 
-import com.example.chat.chat_message.model.ChatMessageDto;
-import com.example.chat.chat_message.repository.ChatMessageRepository;
-import com.example.chat.chat_room.repository.ChatRoomRepository;
+import com.example.chat.chatmessage.model.ChatMessageDto;
+import com.example.chat.chatmessage.repository.ChatMessageRepository;
 import com.example.chat.common.model.BaseRequest;
 import com.example.chat.common.model.BaseResponse;
 import com.example.chat.common.model.Bean;
-import com.example.chat.user.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Service;
@@ -19,6 +18,7 @@ public class ChatMessageService {
     private final ChatMessageRepository chatMessageRepository;
     private final Bean bean;
 
+    @Transactional
     public BaseResponse sendMessage(BaseRequest<ChatMessageDto> req){
         ChatMessageDto chatMessageDto = req.getRequestBody();
         chatMessageDto.init(bean);

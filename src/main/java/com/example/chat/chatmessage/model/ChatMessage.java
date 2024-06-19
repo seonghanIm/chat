@@ -1,13 +1,19 @@
-package com.example.chat.chat_message.model;
+package com.example.chat.chatmessage.model;
 
-import com.example.chat.chat_room.model.ChatRoom;
+import com.example.chat.chatroom.model.ChatRoom;
 import com.example.chat.common.model.BaseEntity;
 import com.example.chat.user.model.User;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Data
 @Entity
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "chat_message")
 public class ChatMessage extends BaseEntity {
 
