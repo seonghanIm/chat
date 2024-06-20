@@ -6,14 +6,12 @@ import com.example.chat.common.model.BaseEntity;
 import com.example.chat.user.model.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Data
 @Entity
@@ -33,21 +31,21 @@ public class ChatRoom extends BaseEntity {
     @ManyToOne
     private User creator;
 
-    @OneToMany(mappedBy = "chatRoom")
-    private List<ChatRoomUser> chatRoomUserList = new ArrayList<>();
+    @OneToMany(mappedBy = "chatRoom", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ChatRoomUser> participantsList;
 
     public ChatRoomDto fromEntity(){
         return ChatRoomDto.builder()
                 .roomName(this.roomName)
                 .creatorId(this.creator.getUserId())
-                .userIdList(getParticipantIdList())
+                .participantsList(getParticipantIdList())
                 .createdAt(this.getCreatedAt())
                 .build();
     }
 
     public List<String> getParticipantIdList(){
         List<String> participantIdList = new ArrayList<>();
-        for(ChatRoomUser chatRoomUser : this.chatRoomUserList){
+        for(ChatRoomUser chatRoomUser : this.participantsList){
             participantIdList.add(chatRoomUser.getUser().getUserId());
         }
         return participantIdList;

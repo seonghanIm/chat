@@ -1,6 +1,7 @@
 package com.example.chat.user.controller;
 
 import com.example.chat.chatroom.model.ChatRoomDto;
+import com.example.chat.chatroom.model.ResponseCode;
 import com.example.chat.common.model.BaseRequest;
 import com.example.chat.common.model.BaseResponse;
 import com.example.chat.user.model.UserDto;
@@ -23,12 +24,15 @@ public class UserController {
         if(result.hasErrors()){
             return BaseResponse.ofFail(400, result.toString());
         }
-        return userService.createUser(req);
+        return userService.createUser(req.getRequestBody());
     }
 
     @PostMapping("/out/chat_room")
-    public BaseResponse<ChatRoomDto> outChatRoom(@RequestBody BaseRequest<UserDto> req){
-        return userService.outChatRoom(req);
+    public BaseResponse<ChatRoomDto> outChatRoom(@RequestBody BaseRequest<UserDto> req, BindingResult result){
+        if(result.hasErrors()){
+            return BaseResponse.ofFail(ResponseCode.FAIL.getCode(), result.toString());
+        }
+        return userService.outChatRoom(req.getRequestBody());
     }
 
 

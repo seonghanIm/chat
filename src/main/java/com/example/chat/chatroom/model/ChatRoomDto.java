@@ -14,23 +14,11 @@ import java.util.UUID;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ChatRoomDto extends BaseDto {
+public class ChatRoomDto {
     private String roomName;
+    private String roomId;
     private String creatorId;
     private String userId;
-    private List<String> userIdList;
+    private List<String> participantsList;
     private String createdAt;
-
-    public ChatRoom toEntity(){
-        return ChatRoom.builder()
-                .roomId(UUID.randomUUID().toString())
-                .roomName(this.roomName)
-                .creator(userRepository.findByUserId(creatorId))
-                .build();
-
-    }
-
-    public ChatRoom createRoom(){
-        return chatRoomRepository.save(toEntity());
-    }
 }

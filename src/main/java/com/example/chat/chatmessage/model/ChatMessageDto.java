@@ -8,7 +8,7 @@ import lombok.experimental.SuperBuilder;
 @Data
 @SuperBuilder
 @NoArgsConstructor
-public class ChatMessageDto extends BaseDto {
+public class ChatMessageDto {
 
     private MessageType messageType;
 
@@ -17,16 +17,5 @@ public class ChatMessageDto extends BaseDto {
     private String senderId;
 
     private String message;
-
-    public ChatMessage toEntity(){
-        ChatMessage chatMessage = new ChatMessage();
-        chatMessage.setMessageType(messageType);
-        chatMessage.setSender(getUserRepository().findByUserId(senderId));
-        chatMessage.setMessage(message);
-        chatMessage.setChatRoom(getChatRoomRepository().findByRoomId(chatRoomId));
-        return chatMessage;
-    }
-
-
 
 }

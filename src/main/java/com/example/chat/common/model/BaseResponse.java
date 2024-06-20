@@ -1,5 +1,7 @@
 package com.example.chat.common.model;
 
+import com.example.chat.chatroom.model.ResponseCode;
+import io.swagger.models.Response;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -20,7 +22,7 @@ public class BaseResponse<T> {
     private T responseBody;
 
     public static <T> BaseResponse<T> ofSuccess(T data) {
-        return new BaseResponse<>(200, "Success", data);
+        return new BaseResponse<>(ResponseCode.SUCCESS.getCode(), ResponseCode.SUCCESS.getMessage(), data);
     }
 
     public static <T> BaseResponse<T> ofFail(int code, String message) {

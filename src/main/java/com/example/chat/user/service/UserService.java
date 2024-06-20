@@ -20,20 +20,18 @@ public class UserService {
     private final ChatRoomRepository chatRoomRepository;
 
     @Transactional
-    public BaseResponse<UserDto> createUser(BaseRequest<UserDto> req){
-        UserDto userDto = req.getRequestBody();
-        if (userRepository.existsByUserId(userDto.getUserId())) {
+    public BaseResponse<UserDto> createUser(UserDto reqDto){
+        if (userRepository.existsByUserId(reqDto.getUserId())) {
             return BaseResponse.ofFail(400,"이미 존재하는 아이디 입니다.");
         }
-        User user = userRepository.save(userDto.toEntity());
+        User user = userRepository.save(reqDto.toEntity());
         return BaseResponse.ofSuccess(user.fromEntity());
     }
+
     @Transactional
-    public BaseResponse<ChatRoomDto> outChatRoom(BaseRequest<UserDto> req){
-        UserDto userDto = req.getRequestBody();
-        ChatRoom chatRoom = chatRoomRepository.findByRoomId(userDto.getChatRoomId());
-        chatRoom.delete();
-        User user = userRepository.findByUserId(userDto.getUserId());
+    public BaseResponse<ChatRoomDto> outChatRoom(UserDto reqDto){
+        ChatRoom chatRoom = chatRoomRepository.findByRoomId(reqDto.getChatRoomId());
+        User user = userRepository.findByUserId(reqDto.getUserId());
         user.outChatRoom(chatRoom);
         return BaseResponse.ofSuccess(chatRoom.fromEntity());
     }

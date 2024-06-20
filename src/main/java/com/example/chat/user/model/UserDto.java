@@ -10,7 +10,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDto extends BaseDto {
+public class UserDto{
     private String userId;
     private String userName;
     private String password;

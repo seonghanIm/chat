@@ -1,7 +1,11 @@
 package com.example.chat.chatmessage.service;
 
+import com.example.chat.chatmessage.mapper.ChatMessageMapper;
+import com.example.chat.chatmessage.model.ChatMessage;
 import com.example.chat.chatmessage.model.ChatMessageDto;
 import com.example.chat.chatmessage.repository.ChatMessageRepository;
+import com.example.chat.chatroom.model.ChatRoom;
+import com.example.chat.chatroom.model.ResponseCode;
 import com.example.chat.common.model.BaseRequest;
 import com.example.chat.common.model.BaseResponse;
 import com.example.chat.common.model.Bean;
@@ -16,15 +20,13 @@ public class ChatMessageService {
 
     private final SimpMessageSendingOperations messagingTemplate;
     private final ChatMessageRepository chatMessageRepository;
-    private final Bean bean;
+    private final ChatMessageMapper chatMessageMapper;
 
     @Transactional
-    public BaseResponse sendMessage(BaseRequest<ChatMessageDto> req){
-        ChatMessageDto chatMessageDto = req.getRequestBody();
-        chatMessageDto.init(bean);
-        chatMessageRepository.save(chatMessageDto.toEntity());
-        messagingTemplate.convertAndSend("/sub/chat/room/" + chatMessageDto.getChatRoomId(), chatMessageDto.getMessage());
-        return BaseResponse.ofSuccess(chatMessageDto);
+    public BaseResponse sendMessage(ChatMessageDto reqDto){
+        ChatMessage res = chatMessageRepository.save(chatMessageMapper.toEntity(reqDto));
+        messagingTemplate.convertAndSend("/sub/chat/room/" + reqDto.getChatRoomId(), reqDto.getMessage());
+        return BaseResponse.ofSuccess(res);
     }
 
 
