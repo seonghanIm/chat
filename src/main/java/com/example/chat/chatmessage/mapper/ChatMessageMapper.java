@@ -5,6 +5,7 @@ import com.example.chat.chatmessage.model.ChatMessageDto;
 import com.example.chat.chatroom.repository.ChatRoomRepository;
 import com.example.chat.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -16,7 +17,7 @@ public class ChatMessageMapper {
     public ChatMessage toEntity(ChatMessageDto d){
         return ChatMessage.builder()
                 .messageType(d.getMessageType())
-                .sender(userRepository.findByUserId(d.getSenderId()))
+                .sender(userRepository.findByUserId(d.getSenderId()).orElseThrow(()->new UsernameNotFoundException("User not found with user id" + d.getSenderId())))
                 .message(d.getMessage())
                 .chatRoom(chatRoomRepository.findByRoomId(d.getChatRoomId()))
                 .build();

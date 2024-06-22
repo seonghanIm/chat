@@ -4,6 +4,7 @@ import com.example.chat.chatroom.model.ChatRoom;
 import com.example.chat.chatroom.model.ChatRoomDto;
 import com.example.chat.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -23,7 +24,7 @@ public class ChatRoomMapper {
         return ChatRoom.builder()
                 .roomId(d.getRoomId())
                 .roomName(d.getRoomName())
-                .creator(userRepository.findByUserId(d.getCreatorId()))
+                .creator(userRepository.findByUserId(d.getCreatorId()).orElseThrow(()->new UsernameNotFoundException("User not found with user id" + d.getUserId())))
                 .build();
 
     }

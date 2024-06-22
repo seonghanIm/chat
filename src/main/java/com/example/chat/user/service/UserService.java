@@ -10,6 +10,7 @@ import com.example.chat.user.model.UserDto;
 import com.example.chat.user.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -31,7 +32,9 @@ public class UserService {
     @Transactional
     public BaseResponse<ChatRoomDto> outChatRoom(UserDto reqDto){
         ChatRoom chatRoom = chatRoomRepository.findByRoomId(reqDto.getChatRoomId());
-        User user = userRepository.findByUserId(reqDto.getUserId());
+        User user = userRepository.findByUserId(reqDto.getUserId())
+                .orElseThrow(()->new UsernameNotFoundException("User not found with user Id" + reqDto.getUserId()));
+
         user.outChatRoom(chatRoom);
         return BaseResponse.ofSuccess(chatRoom.fromEntity());
     }

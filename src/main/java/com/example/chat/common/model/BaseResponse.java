@@ -19,6 +19,7 @@ public class BaseResponse<T> {
     }
     private int code;
     private String message;
+
     private T responseBody;
 
     public static <T> BaseResponse<T> ofSuccess(T data) {
