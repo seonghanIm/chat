@@ -15,7 +15,6 @@ public class ChatRoomDto {
     private String roomName;
     private String roomId;
     private String creatorId;
-    private String userId;
     private List<String> participantsList;
     private String createdAt;
 }

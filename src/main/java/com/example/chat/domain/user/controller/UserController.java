@@ -48,28 +48,19 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public BaseResponse login(@RequestBody BaseRequest<UserDto> req){
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(req.getRequestBody().getUserId(),req.getRequestBody().getPassword())
-        );
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtUtils.generateJwtToken(authentication);
-
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        return BaseResponse.ofSuccess(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
+    public BaseResponse login(@RequestBody BaseRequest<UserDto> req,BindingResult result){
+        if(result.hasErrors()){
+            BaseResponse.ofFail(400,result.toString());
+        }
+        return userService.login(req);
     }
 
     @PostMapping("/signup")
-    public BaseResponse registerUser(@RequestBody BaseRequest<UserDto> req){
-        UserDto reqDto = req.getRequestBody();
-        if (userRepository.existsByUserId(reqDto.getUserId())) {
-            return BaseResponse.ofFail(400,"이미 존재하는 아이디 입니다.");
+    public BaseResponse registerUser(@RequestBody BaseRequest<UserDto> req, BindingResult result){
+        if(result.hasErrors()){
+            BaseResponse.ofFail(400,result.toString());
         }
-        User user = reqDto.toEntity();
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        User resUser = userRepository.save(user);
-        return BaseResponse.ofSuccess(resUser.fromEntity());
+        return userService.resgisterUser(req);
     }
 
 

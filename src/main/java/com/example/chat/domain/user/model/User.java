@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class User extends BaseEntity {
     @Column(name = "user_id", nullable = false)
     private String userId;
 
+    @ToString.Exclude
     @OneToMany(mappedBy =  "creator")
     private List<ChatRoom> chatRoomList;
 
@@ -40,6 +42,7 @@ public class User extends BaseEntity {
     @Column(nullable = false)
     private String password;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ChatRoomUser> chatRoomUserList = new ArrayList<>();
 

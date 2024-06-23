@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
@@ -25,19 +26,22 @@ public class ChatRoom extends BaseEntity {
 
     private String roomName;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "chatRoom")
     private List<ChatMessage> messages;
 
+    @ToString.Exclude
     @ManyToOne
+    @JoinColumn(name = "creator_id")
     private User creator;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "chatRoom", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ChatRoomUser> participantsList;
+    private List<ChatRoomUser> participantsList = new ArrayList<>();
 
     public ChatRoomDto fromEntity(){
         return ChatRoomDto.builder()
                 .roomName(this.roomName)
-                .creatorId(this.creator.getUserId())
                 .participantsList(getParticipantIdList())
                 .createdAt(this.getCreatedAt())
                 .build();
@@ -49,5 +53,9 @@ public class ChatRoom extends BaseEntity {
             participantIdList.add(chatRoomUser.getUser().getUserId());
         }
         return participantIdList;
+    }
+
+    public void addParticipant(ChatRoomUser user){
+        this.participantsList.add(user);
     }
 }

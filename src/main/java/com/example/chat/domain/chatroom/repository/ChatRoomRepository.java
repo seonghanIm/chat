@@ -20,5 +20,5 @@ public interface ChatRoomRepository extends JpaRepository<ChatRoom, String> {
             "join chat_room_user as cru on cr.room_id = cru.chat_room_id\n" +
             "where cru.user_id = :userId\n" +
             "and cr.delete_yn = 'N'",nativeQuery = true)
-    List<ChatRoom> findMyChatRoom(@Param("userId") String userId);
+    List<ChatRoom> findMyChatRoomList(@Param("userId") String userId);
 }

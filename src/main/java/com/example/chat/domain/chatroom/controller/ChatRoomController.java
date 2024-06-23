@@ -1,34 +1,45 @@
 package com.example.chat.domain.chatroom.controller;
 
 import com.example.chat.domain.chatroom.model.ChatRoom;
+import com.example.chat.domain.chatroom.model.ChatRoomDto;
 import com.example.chat.domain.chatroom.repository.ChatRoomRepository;
+import com.example.chat.domain.chatroom.service.ChatRoomService;
+import com.example.chat.domain.common.model.BaseRequest;
+import com.example.chat.domain.common.model.BaseResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/chat")
+@RequestMapping("/chat/room")
 @RequiredArgsConstructor
 public class ChatRoomController {
 
     private final ChatRoomRepository chatRoomRepository;
+    private final ChatRoomService chatRoomService;
 
-    @GetMapping("/rooms")
+    @PostMapping("/list")
     @ResponseBody
-    public List<ChatRoom> room(){
-        return chatRoomRepository.findAll();
+    public BaseResponse<List<ChatRoomDto>> room(@RequestBody BaseRequest<ChatRoomDto> req, BindingResult result){
+        if(result.hasErrors()){
+            BaseResponse.ofFail(400,result.toString());
+        }
+        return chatRoomService.getChatRoomList(req);
     }
 
-//    @PostMapping("/room")
-//    @ResponseBody
-//    public ChatRoom createRoom(@RequestBody ChatRoomDto dto){
-//        ChatRoom chatRoom = ChatRoom.create(dto.getRoomName());
-//        chatRoomRepository.save(chatRoom);
-//        return chatRoom;
-//    }
+    @PostMapping("/create")
+    public BaseResponse<ChatRoomDto> createRoom(@RequestBody BaseRequest<ChatRoomDto> req,BindingResult result){
+        if(result.hasErrors()){
+            BaseResponse.ofFail(400,result.toString());
+        }
+        return chatRoomService.createRoom(req);
+    }
 
-    @GetMapping("/room/{roomId}")
+
+
+    @GetMapping("/{roomId}")
     @ResponseBody
     public ChatRoom roomInfo(@PathVariable String roomId){
         return chatRoomRepository.findByRoomId(roomId);

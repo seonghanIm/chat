@@ -32,7 +32,7 @@ public class BaseEntity {
     private String updatedAt;
 
     @Column(name = "delete_yn")
-    @ColumnDefault("N")
+    @ColumnDefault("'N'")
     private String deleteYn = "N";
 
     @PrePersist
