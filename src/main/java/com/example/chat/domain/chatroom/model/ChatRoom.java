@@ -2,6 +2,7 @@ package com.example.chat.domain.chatroom.model;
 
 import com.example.chat.domain.chatmessage.model.ChatMessage;
 import com.example.chat.domain.chatroomuser.model.ChatRoomUser;
+import com.example.chat.domain.chatroomuser.model.Id.ChatRoomUserId;
 import com.example.chat.domain.common.model.BaseEntity;
 import com.example.chat.domain.user.model.User;
 import jakarta.persistence.*;
@@ -55,7 +56,12 @@ public class ChatRoom extends BaseEntity {
         return participantIdList;
     }
 
-    public void addParticipant(ChatRoomUser user){
-        this.participantsList.add(user);
+    public void addParticipant(User user){
+        ChatRoomUser chatRoomUser = ChatRoomUser.builder()
+                .id(new ChatRoomUserId(getRoomId(),user.getUserId()))
+                .chatRoom(this)
+                .user(user)
+                .build();
+        this.participantsList.add(chatRoomUser);
     }
 }

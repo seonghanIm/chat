@@ -19,10 +19,9 @@ public class ChatMessageService {
     private final ChatMessageMapper chatMessageMapper;
 
     @Transactional
-    public BaseResponse sendMessage(ChatMessageDto reqDto){
+    public void sendMessage(ChatMessageDto reqDto){
         ChatMessage res = chatMessageRepository.save(chatMessageMapper.toEntity(reqDto));
         messagingTemplate.convertAndSend("/sub/chat/room/" + reqDto.getChatRoomId(), reqDto.getMessage());
-        return BaseResponse.ofSuccess(res);
     }
 
 

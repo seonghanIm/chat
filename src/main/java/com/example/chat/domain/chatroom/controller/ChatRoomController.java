@@ -38,12 +38,29 @@ public class ChatRoomController {
     }
 
 
+    @PostMapping("/join")
+    public BaseResponse<ChatRoomDto> joinRoom(@RequestBody BaseRequest<ChatRoomDto> req, BindingResult result){
+        if(result.hasErrors()){
+            BaseResponse.ofFail(400,result.toString());
+        }
+        return chatRoomService.joinRoom(req);
+    }
+
+    @PostMapping("/invite")
+    public BaseResponse<ChatRoomDto> inviteRoom(@RequestBody BaseRequest<ChatRoomDto> req, BindingResult result){
+        if(result.hasErrors()){
+            BaseResponse.ofFail(400, result.toString());
+        }
+        return chatRoomService.inviteRoom(req);
+    }
+
 
     @GetMapping("/{roomId}")
     @ResponseBody
     public ChatRoom roomInfo(@PathVariable String roomId){
         return chatRoomRepository.findByRoomId(roomId);
     }
+
 
 
 

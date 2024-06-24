@@ -32,15 +32,6 @@ public class UserService {
     private final JwtUtils jwtUtils;
 
     @Transactional
-    public BaseResponse<UserDto> createUser(UserDto reqDto){
-        if (userRepository.existsByUserId(reqDto.getUserId())) {
-            return BaseResponse.ofFail(400,"이미 존재하는 아이디 입니다.");
-        }
-        User user = userRepository.save(reqDto.toEntity());
-        return BaseResponse.ofSuccess(user.fromEntity());
-    }
-
-    @Transactional
     public BaseResponse<ChatRoomDto> outChatRoom(UserDto reqDto){
         ChatRoom chatRoom = chatRoomRepository.findByRoomId(reqDto.getChatRoomId());
         User user = userRepository.findByUserId(reqDto.getUserId())
@@ -68,7 +59,7 @@ public class UserService {
             return BaseResponse.ofFail(400,"이미 존재하는 아이디입니다.");
         }
         User user = reqDto.toEntity();
-        user.setPassword(passwordEncoder.encode(reqDto.getPassword()));
+         user.setPassword(passwordEncoder.encode(reqDto.getPassword()));
         User resUser = userRepository.save(user);
         return BaseResponse.ofSuccess(resUser.fromEntity());
     }

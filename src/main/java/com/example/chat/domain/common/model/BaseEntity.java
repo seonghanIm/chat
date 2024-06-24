@@ -31,14 +31,14 @@ public class BaseEntity {
     @Column(name = "updated_at")
     private String updatedAt;
 
-    @Column(name = "delete_yn")
-    @ColumnDefault("'N'")
+    @Column(name = "delete_yn", nullable = false, columnDefinition = "varchat(1) default 'N'")
     private String deleteYn = "N";
 
     @PrePersist
     public void onPrePersist() {
         this.createdAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
         this.updatedAt = this.createdAt;
+        this.deleteYn = "N";
     }
 
     @PreUpdate

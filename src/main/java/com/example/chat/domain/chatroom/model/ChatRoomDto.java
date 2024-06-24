@@ -17,4 +17,5 @@ public class ChatRoomDto {
     private String creatorId;
     private List<String> participantsList;
     private String createdAt;
+    private String invitedUserid;
 }

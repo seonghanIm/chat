@@ -31,13 +31,6 @@ public class UserController {
     private final PasswordEncoder passwordEncoder;
     private final JwtUtils jwtUtils;
     private final UserRepository userRepository;
-    @PostMapping("/create")
-    public BaseResponse<UserDto> createUser(@RequestBody BaseRequest<UserDto> req, BindingResult result){
-        if(result.hasErrors()){
-            return BaseResponse.ofFail(400, result.toString());
-        }
-        return userService.createUser(req.getRequestBody());
-    }
 
     @PostMapping("/out/chat_room")
     public BaseResponse<ChatRoomDto> outChatRoom(@RequestBody BaseRequest<UserDto> req, BindingResult result){

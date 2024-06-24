@@ -14,7 +14,7 @@ public class ChatMessageController {
 
     private final ChatMessageService chatMessageService;
     @MessageMapping("chat/message")
-    public BaseResponse message(BaseRequest<ChatMessageDto> req){
-        return chatMessageService.sendMessage(req.getRequestBody());
+    public void message(BaseRequest<ChatMessageDto> req){
+        chatMessageService.sendMessage(req.getRequestBody());
     }
 }
