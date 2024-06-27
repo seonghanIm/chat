@@ -1,13 +1,17 @@
 package com.example.chat.domain.chatmessage.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Data
 @SuperBuilder
-@NoArgsConstructor
 public class ChatMessageDto {
+
+    public ChatMessageDto(){
+        this.CHAT_ROOM_ADDR += this.chatRoomId;
+    }
 
     private MessageType messageType;
 
@@ -16,5 +20,8 @@ public class ChatMessageDto {
     private String senderId;
 
     private String message;
+
+    private String CHAT_ROOM_ADDR = "/sub/chat/room/";
+
 
 }
