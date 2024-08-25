@@ -23,8 +23,10 @@ import java.util.List;
 @Table(name = "chat_room")
 public class ChatRoom extends BaseEntity {
     @Id
+    @Column(name = "room_id")
     private String roomId;
 
+    @Column(name = "room_name")
     private String roomName;
 
     @ToString.Exclude

@@ -1,6 +1,8 @@
 package com.example.chat.domain.chatroom.repository;
 
 import com.example.chat.domain.chatroom.model.ChatRoom;
+import com.example.chat.domain.chatroom.model.ChatRoomDto;
+import com.example.chat.domain.chatroom.model.ChatRoomInterfaceDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,10 +17,11 @@ public interface ChatRoomRepository extends JpaRepository<ChatRoom, String> {
     ChatRoom findByRoomId(String roomId);
     ChatRoom save(ChatRoom chatRoom);
     List<ChatRoom> findAllByDeleteYnEquals(String deleteYn);
-    @Query(value = "select chat_room_id\n" +
-            "from chat_room as cr\n" +
-            "join chat_room_user as cru on cr.room_id = cru.chat_room_id\n" +
-            "where cru.user_id = :userId\n" +
-            "and cr.delete_yn = 'N'",nativeQuery = true)
-    List<ChatRoom> findMyChatRoomList(@Param("userId") String userId);
+
+    @Query(value = "SELECT cr.room_id AS roomId, cr.room_name AS roomName, cr.creator_id AS creatorId, cr.created_at AS createdAt \n" +
+            "                   FROM chat_room AS cr  \n" +
+            "                   JOIN chat_room_user AS cru ON cr.room_id = cru.chat_room_id  \n" +
+            "                   WHERE cru.user_id = :userId  \n" +
+            "                   AND cr.delete_yn = 'N';",nativeQuery = true)
+    List<ChatRoomInterfaceDto> findMyChatRoomList(@Param("userId") String userId);
 }

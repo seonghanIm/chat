@@ -11,11 +11,11 @@ import java.util.List;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ChatRoomDto {
+public class ChatRoomDto implements ChatRoomInterfaceDto {
     private String roomName;
     private String roomId;
     private String creatorId;
     private List<String> participantsList;
     private String createdAt;
-    private String invitedUserid;
+    private String invitedUserId;
 }
