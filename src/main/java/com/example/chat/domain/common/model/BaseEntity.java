@@ -31,7 +31,7 @@ public class BaseEntity {
     @Column(name = "updated_at")
     private String updatedAt;
 
-    @Column(name = "delete_yn", nullable = false, columnDefinition = "varchat(1) default 'N'")
+    @Column(name = "delete_yn", nullable = false, length = 1, columnDefinition = "default 'N'")
     private String deleteYn = "N";
 
     @PrePersist
